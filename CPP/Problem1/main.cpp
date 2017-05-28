@@ -2,6 +2,20 @@
 
 using namespace std;
 
+static int s_clock ;
+
+static void startClock()
+{
+	s_clock = clock() ;
+}
+
+static void endClock()
+{
+	int e_clock = clock() ;
+
+	cout << "Execution Time is - " << (e_clock-s_clock)/double(CLOCKS_PER_SEC)*1000 << "\n" ;
+}
+
 static int MAX_VALUE = 1000 ;
 
 
@@ -25,6 +39,8 @@ void returnValue( T returnVal )
 int main()
 {
 
+	startClock() ;
+
 	int acc = 0 ;
 
 	for( int i = 0; i != MAX_VALUE; ++i )
@@ -38,6 +54,8 @@ int main()
 	}
 
 	returnValue( acc ) ;
+
+	endClock() ;
 
 	return 0;
 }
