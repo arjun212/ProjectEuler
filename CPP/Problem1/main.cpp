@@ -15,9 +15,9 @@ bool isMultiple( int value, int base )
 template< typename T >
 void returnValue( T returnVal )
 {
-	cout << "\n" ;
+	cout << "\n"                            ;
 	cout << "The Answer is : " << returnVal ;
-	cout << "\n" ;
+	cout << "\n"                            ;
 }
 
 
@@ -30,7 +30,8 @@ int main()
 	for( int i = 0; i != MAX_VALUE; ++i )
 	{
 
-		if ( isMultiple( i, 3 ) || isMultiple( i, 5 ) )
+		if ( isMultiple( i, 3 ) || 
+			 isMultiple( i, 5 )   )
 		{
 			acc += i ;
 		}

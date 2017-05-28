@@ -5,6 +5,20 @@
 
 using namespace std;
 
+static int s_clock ;
+
+static void startClock()
+{
+	s_clock = clock() ;
+}
+
+static void endClock()
+{
+	int e_clock = clock() ;
+
+	cout << "Execution Time is - " << (e_clock-s_clock)/double(CLOCKS_PER_SEC)*1000 << "\n" ;
+}
+
 static map< int, int > fibValueMap ;
 
 template< typename T >
@@ -47,6 +61,8 @@ int fib( int i )
 int main()
 {
 
+	startClock() ;
+
 	fibValueMap[ 0 ] = 1 ;
 	fibValueMap[ 1 ] = 1 ;
 	fibValueMap[ 2 ] = 2 ;
@@ -69,6 +85,8 @@ int main()
 	cout << std::fixed ;
 	cout << std::setprecision( 2 ) ;
 	returnValue( acc ) ;
+
+	endClock() ;
 
 	return 0;
 }
