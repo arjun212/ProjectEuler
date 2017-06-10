@@ -1,6 +1,10 @@
 #include <iostream>
+#include <ctime>
 #include <cmath>
+#include <vector> 
+#include <map> 
 #include <iomanip>
+
 
 using namespace std;
 
@@ -27,38 +31,46 @@ void returnValue( T returnVal )
 	cout << "\n"                            ;
 }
 
-
-bool isPrime( int val )
+inline bool isFactor( int val, int base )
 {
-	if ( val == 2 || val == 3 )
-		return true ;
+	return base % val == 0 ;
+}
+
+int getPrimeFactorsSize( int val )
+{
+	vector< int > result { 1, val } ;
 
 	for ( int i = 2; i <= sqrt( val ) + 1; ++i )
 	{
-		if ( val % i == 0)
-			return false ;
-	}
-	return true ;
-}
+		if ( isFactor( i, val ) )
+		{
+			result.push_back( i ) ;
 
+			if ( i != ( val / i ) )
+				result.push_back( val / i ) ;
+		}
+	}
+
+	return result.size() ;
+}
 
 int main()
 {
-
 	startClock() ;
 
-	double acc = 0 ;
+	int i           = 2 ;
+	int triangleNum = 1 ;
 
-	for (int i = 2 ; i < 2000000 ; ++i )
+	while ( getPrimeFactorsSize( triangleNum ) < 500 )
 	{
-		acc += isPrime( i ) ? i : 0 ;
+		triangleNum += i ;
+		++i ;
 	}
 
-	cout << std::fixed ;
-	cout << std::setprecision( 2 ) ;
-	returnValue( acc ) ;
+	returnValue( triangleNum ) ;
 
 	endClock() ;
+
 
 	return 0;
 }

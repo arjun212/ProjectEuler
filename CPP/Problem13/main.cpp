@@ -1,6 +1,8 @@
 #include <iostream>
-#include <cmath>
+#include <ctime>
+#include <fstream>
 #include <iomanip>
+
 
 using namespace std;
 
@@ -27,38 +29,34 @@ void returnValue( T returnVal )
 	cout << "\n"                            ;
 }
 
+//Map<Position, Value>
+static       string FILENAME      = "data.dat" ;
 
-bool isPrime( int val )
+double accumalateData()
 {
-	if ( val == 2 || val == 3 )
-		return true ;
+	ifstream file ;
+    file.open( FILENAME );
 
-	for ( int i = 2; i <= sqrt( val ) + 1; ++i )
+	double number ;
+	double acc = 0;
+
+	while ( file >> number )
 	{
-		if ( val % i == 0)
-			return false ;
+		acc += number ;
 	}
-	return true ;
-}
 
+	return acc ;
+}
 
 int main()
 {
-
 	startClock() ;
 
-	double acc = 0 ;
-
-	for (int i = 2 ; i < 2000000 ; ++i )
-	{
-		acc += isPrime( i ) ? i : 0 ;
-	}
-
-	cout << std::fixed ;
-	cout << std::setprecision( 2 ) ;
-	returnValue( acc ) ;
+	cout << std::setprecision( 11 ) ;
+	returnValue( accumalateData() ) ;
 
 	endClock() ;
+
 
 	return 0;
 }

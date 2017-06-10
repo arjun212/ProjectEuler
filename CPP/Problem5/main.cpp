@@ -50,20 +50,20 @@ bool isFactor( int val, int base )
 	return base % val == 0 ;
 }
 
-vector< int > * getPrimeFactors( int & val )
+vector< int > getPrimeFactors( int & val )
 {
-	vector< int > * result = new vector< int >() ;
+	vector< int > result ;
 
 	if ( isPrime( val ) )
 	{
-		result->push_back( val ) ;
+		result.push_back( val ) ;
 		return result ;
 	}
 
 	for ( int i = 2; i <= val / 2; ++i )
 	{
 		if ( isPrime( i ) && isFactor( i, val ) )
-			result->push_back( i ) ;
+			result.push_back( i ) ;
 	}
 
 	return result ;
@@ -120,11 +120,10 @@ int main()
 
 	for ( int i = 2; i <= 20; ++i )
 	{
-		vector< int > * primeFactors = getPrimeFactors( i ) ;
+		vector< int > primeFactors = getPrimeFactors( i ) ;
 
-		updateFactorsMap( i, *primeFactors, factorsMap ) ;
+		updateFactorsMap( i, primeFactors, factorsMap ) ;
 		
-		delete primeFactors ;
 	}
 	
 	cout << std::fixed ;
